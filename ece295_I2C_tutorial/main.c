@@ -63,12 +63,16 @@ void screen_write_string(char string_to_write[])
 		if ((letter != 0) && (letter % LINE_LENGTH == 0))
 		{
 			if (current_line == COMMAND_SET_CURSOR_LINE_4){
-				current_line = COMMAND_SET_CURSOR_LINE_1;// We've gone past the end of the line, go to the next one
+				// We've gone past the end of the screen, go back to top
+				current_line = COMMAND_SET_CURSOR_LINE_1;
+				// Clear the screen 
 				I2Csendcmd(SCREEN_ADDR, COMMAND_CLEAR_DISPLAY);
 			}
-			else
-			current_line = current_line+0x20;
-			I2Csendcmd(SCREEN_ADDR, current_line); // We've gone past the end of the line, go to the next one
+			else {
+				current_line = current_line+0x20;
+			}
+			// We've gone past the end of the line, go to the next one
+			I2Csendcmd(SCREEN_ADDR, current_line); 
 		}
 		
 		I2Csenddatum(SCREEN_ADDR, string_to_write[letter]);
