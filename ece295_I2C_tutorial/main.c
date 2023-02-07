@@ -85,7 +85,7 @@ int main(void)
 	volatile char string_to_write[STR_LEN];
 	
 	_delay_ms(5);
-	PORTD = PORTD | (0<<PD6); // turn off
+	PORTD = PORTD & (0<<PD6); // turn off
 	_delay_ms(200);
 	PORTD = PORTD | (1<<PD6); // turn on display
 	_delay_ms(5);
