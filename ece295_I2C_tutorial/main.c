@@ -91,17 +91,23 @@ int main(void)
 	_delay_ms(5);
 	
 	//Set up I2C
-	I2Cinit();
+	I2Cinit(); // Done
 	
 	//Initialize display
-	screen_init();
+	screen_init(); // TODO
 	
 	//Initialize ADC
-	ADC_Init();
+	ADC_Init(); // TODO
 		
+	//Write some data to get started
+	strncpy(string_to_write,"hello world",STR_LEN);
+	screen_write_string(string_to_write);
+	
 	while (1)
 	{
-		screen_write_string(string_to_write);				
+		_delay_ms(100); // sit idle
+		
+		// Read from ADC periodically to check the temperature
 	}
 }
 
