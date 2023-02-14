@@ -35,7 +35,7 @@ void I2Cstart()
 {
 	TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN); // clear interrupt (TWINT), generate a start when possible (TWSTA), enable I2C (TWEN)
 	while ((TWCR & (1<<TWINT))==0); // wait until interrupt actually clears
-	uint8_t status = TWSR & 0XF8; //check if start transmitted
+	volatile uint8_t status = TWSR & 0XF8; //check if start transmitted
 }
 
 
@@ -61,7 +61,7 @@ void I2Cwrite(uint8_t data)
 	TWDR = data; //write data to data register
 	TWCR =  (1<<TWINT)|(1<<TWEN);
 	while (!(TWCR & (1<<TWINT)));
-	uint8_t status = TWSR & 0XF8; //check if start transmitted
+	volatile uint8_t status = TWSR & 0XF8; //check if start transmitted
 }
 
 
